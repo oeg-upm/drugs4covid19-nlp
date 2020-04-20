@@ -14,7 +14,7 @@ initial = 0
 
 # librAIry Bio-NLP Endpoint
 #API_ENDPOINT = "http://localhost:5000/bio-nlp/diseases"
-API_ENDPOINT = "http://localhost:6200/bio-nlp/drugs"
+API_ENDPOINT = "http://localhost:6200/bio-nlp/diseases"
 
 # Setup a Solr instance. The timeout is optional.
 solr = pysolr.Solr('http://librairy.linkeddata.es/data/covid-paragraphs', timeout=2)
