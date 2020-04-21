@@ -69,7 +69,6 @@ def annotate(annotation_type,document):
 def get_document(paragraph):
     if (not 'text_t' in paragraph):
         return paragraph
-    print("############################################")
     document = {}
     document['id'] = paragraph['id']
     document['section_s'] = paragraph['section_s']
@@ -78,7 +77,6 @@ def get_document(paragraph):
     document['size_i'] = paragraph['size_i']
     annotate("diseases",document)
     annotate("drugs",document)
-    print(document)
     return document
 
 def get_solr_query(annotation_type):
@@ -100,8 +98,8 @@ while (not completed):
         cursor = paragraphs.nextCursorMark
         counter += len(paragraphs)
         documents = pool.map(get_document, paragraphs)
-        #solr.add(documents)
-        #solr.commit()
+        solr.add(documents)
+        solr.commit()
         print("[",datetime.now(),"] solr index updated! ",counter)
         if (old_counter == counter):
             print("done!")
@@ -110,7 +108,7 @@ while (not completed):
         print("error:",e)
         print("Solr query error. Wait for 5secs..")
         time.sleep(5.0)
-        #solr.commit()
+        solr.commit()
     break
 
 print(counter,"paragraphs successfully annotated with MESH-Diseases")
