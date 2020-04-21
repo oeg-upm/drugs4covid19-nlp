@@ -92,7 +92,7 @@ filters = [get_solr_query('drugs'),get_solr_query('diseases')]
 while (not completed):
     old_counter = counter
     #solr_query = " AND ".join([y for x in filters for y in x])
-    solr_query = "*:*"")
+    solr_query = "*:*"
     try:
         print(solr_query)
         paragraphs = solr.search(q=solr_query,rows=window_size,cursorMark=cursor,sort="id asc")
