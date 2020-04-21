@@ -13,8 +13,6 @@ import time
 initial = 0
 
 # librAIry Bio-NLP Endpoint
-#API_ENDPOINT = "http://localhost:5000/bio-nlp/diseases"
-#API_ENDPOINT = "http://localhost:6200/bio-nlp/diseases"
 BIONLP_ENDPOINT = "http://localhost:6200/bio-nlp"
 #BIONLP_ENDPOINT = "http://localhost:5000/bio-nlp"
 
@@ -38,7 +36,7 @@ def get_annotations(annotation,text):
 
 def annotate(annotation_type,document):
     codes, names = {}, {}
-    for code in range(0,11):
+    for code in range(0,20):
         codes[code] = []
         names[code] = []
     text = document['text_t']
@@ -53,7 +51,9 @@ def annotate(annotation_type,document):
                 code_value = annotation['atc_code']
             if (code_value != 'nan'):
                 codes[level].append(str(code_value))
-            name_value = annotation["name"].lower()
+            name_value = ""
+            if ('name' in annotation):
+                name_value = annotation["name"].lower()
             if (len(name_value) > 0):
                 names[level].append(str(name_value))
     for code in codes:
@@ -71,10 +71,14 @@ def get_document(paragraph):
         return paragraph
     document = {}
     document['id'] = paragraph['id']
-    document['section_s'] = paragraph['section_s']
-    document['text_t'] = paragraph['text_t']
-    document['article_id_s'] = paragraph['article_id_s']
-    document['size_i'] = paragraph['size_i']
+    if ('section_s' in paragraph):
+        document['section_s'] = paragraph['section_s']
+    if ('text_t' in paragraph):
+        document['text_t'] = paragraph['text_t']
+    if ('article_id_s' in paragraph):
+        document['article_id_s'] = paragraph['article_id_s']
+    if ('size_i' in paragraph):
+        document['size_i'] = paragraph['size_i']
     annotate("diseases",document)
     annotate("drugs",document)
     return document
@@ -82,7 +86,7 @@ def get_document(paragraph):
 def get_solr_query(annotation_type):
     return ["!bionlp_"+annotation_type+"_N"+str(i)+":[* TO *]" for i in range(0,11)]
 
-pool = mp.Pool(8)
+pool = mp.Pool(4)
 
 counter = 0
 completed = False
@@ -94,7 +98,6 @@ while (not completed):
     #solr_query = " AND ".join([y for x in filters for y in x])
     solr_query = "*:*"
     try:
-        print(solr_query)
         paragraphs = solr.search(q=solr_query,rows=window_size,cursorMark=cursor,sort="id asc")
         cursor = paragraphs.nextCursorMark
         counter += len(paragraphs)
@@ -106,7 +109,7 @@ while (not completed):
             print("done!")
             break
     except Exception as e:
-        print("error:",e)
+        print(repr(e))
         print("Solr query error. Wait for 5secs..")
         time.sleep(5.0)
         solr.commit()
