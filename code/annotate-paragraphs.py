@@ -52,10 +52,10 @@ def annotate(annotation_type,document):
             if ('atc_code' in annotation):
                 code_value = annotation['atc_code']
             if (code_value != 'nan'):
-                codes[level].append(code_value)
+                codes[level].append(str(code_value))
             name_value = annotation["name"].lower()
             if (len(name_value) > 0):
-                names[level].append(name_value)
+                names[level].append(str(name_value))
     for code in codes:
         if (len(codes[code]) > 0):
             document['bionlp_'+annotation_type+"_C"+str(code)]= list(set(codes[code]))
