@@ -43,7 +43,7 @@ def annotate(annotation_type,document):
         names[code] = []
     text = document['text_t']
     for annotation in get_annotations(annotation_type,text):
-        print(annotation_type,annotation,"found")
+        #print(annotation_type,annotation,"found")
         if ("level" in annotation):
             level = int(annotation["level"])
             code_value = 'nan'
@@ -80,7 +80,7 @@ def get_document(paragraph):
     return document
 
 def get_solr_query(annotation_type):
-    return ["!bionlp_"+annotation_type+str(i)+"_t:[* TO *]" for i in range(1,2)]
+    return ["!bionlp_"+annotation_type+"_N"+str(i)+":[* TO *]" for i in range(0,11)]
 
 pool = mp.Pool(8)
 
