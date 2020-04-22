@@ -27,3 +27,6 @@ def build_donut_plot(self,data,label):
   plt.setp( mypie2, width=0.4, edgecolor='white')
   plt.margins(0,0)
   return plt
+
+def make_clickable(label,url):
+    return '<a href="{}" target="_blank">{}</a>'.format(url,label)
