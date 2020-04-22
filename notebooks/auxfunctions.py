@@ -1,7 +1,10 @@
 import matplotlib.pyplot as plt
 
 class Plotter:
-    
+
+    def __init__(self):
+        pass
+
     def build_donut_plot(self,data,label):
       group_names=[]
       group_size=[]
