@@ -13,7 +13,7 @@ import time
 initial = 0
 
 # librAIry Bio-NLP Endpoint
-BIONLP_ENDPOINT = "http://localhost:6200/bio-nlp"
+BIONLP_ENDPOINT = "http://librairy.linkeddata.es/bio-nlp"
 #BIONLP_ENDPOINT = "http://localhost:5000/bio-nlp"
 
 # Setup a Solr instance. The timeout is optional.
@@ -86,11 +86,11 @@ def get_document(paragraph):
 def get_solr_query(annotation_type):
     return ["!bionlp_"+annotation_type+"_N"+str(i)+":[* TO *]" for i in range(0,11)]
 
-pool = mp.Pool(4)
+pool = mp.Pool(2)
 
 counter = 0
 completed = False
-window_size=250
+window_size=500
 cursor = "*"
 filters = [get_solr_query('drugs'),get_solr_query('diseases')]
 while (not completed):
@@ -102,6 +102,7 @@ while (not completed):
         cursor = paragraphs.nextCursorMark
         counter += len(paragraphs)
         documents = pool.map(get_document, paragraphs)
+        print("[",datetime.now(),"] solr indexing..")
         solr.add(documents)
         solr.commit()
         print("[",datetime.now(),"] solr index updated! ",counter)
