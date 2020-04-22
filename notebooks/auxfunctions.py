@@ -28,5 +28,5 @@ def build_donut_plot(self,data,label):
   plt.margins(0,0)
   return plt
 
-def make_clickable(label,url):
+def make_clickable(self,label,url):
     return '<a href="{}" target="_blank">{}</a>'.format(url,label)
