@@ -1,5 +1,7 @@
 # Drugs4Covid NLP Support
 
+[![Search-Engine In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/oeg-upm/drugs4covid19-nlp//blob/master/notebooks/search-engine.ipynb)
+
 NLP-based resources created to support the [Drugs4Covid19](https://drugs4covid.oeg-upm.net) project.
 
 # What is Drugs4Covid?
