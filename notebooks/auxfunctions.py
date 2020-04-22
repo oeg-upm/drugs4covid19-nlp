@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def build_donut_plot(self,data,label):
+def build_donut_plot(data,label):
   group_names=[]
   group_size=[]
   subgroup_names=[]
@@ -28,5 +28,5 @@ def build_donut_plot(self,data,label):
   plt.margins(0,0)
   return plt
 
-def make_clickable(self,label,url):
+def make_clickable(label,url):
     return '<a href="{}" target="_blank">{}</a>'.format(url,label)
