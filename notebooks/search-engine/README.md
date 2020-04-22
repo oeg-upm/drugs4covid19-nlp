@@ -1,6 +1,4 @@
-# Drugs4Covid Search Engine
-
-[![Search-Engine In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/oeg-upm/drugs4covid19-nlp/blob/master/notebooks/search-engine/Search_Engine.ipynb)
+# Drugs4Covid Search Engine  [![Search-Engine In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/oeg-upm/drugs4covid19-nlp/blob/master/notebooks/search-engine/Search_Engine.ipynb)
 
 ## Issues
 
