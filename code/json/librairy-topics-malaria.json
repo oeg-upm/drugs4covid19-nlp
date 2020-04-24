@@ -1,0 +1,47 @@
+{
+	"name": "malaria-disease-model",
+	"description": "Topic model created from paragraphs retrieved from the COVID-19 Open Research Dataset (CORD-19), a free resource of over 44,000 scholarly articles about COVID-19 and the coronavirus family of viruses for use by the global research community. ",
+	"contactEmail": "cbadenes@fi.upm.es",
+	"version": "0.1",
+	"annotate": false,
+	"parameters": {
+		"maxdocratio": "0.7",
+		"minfreq": "100",
+		"multigrams": "false",
+		"retries": "0",
+    "topics":"100",
+    "pos": "VERB NOUN PROPER_NOUN ADJECTIVE",
+		"seed": "1066",
+		"alpha": "0.1",
+		"beta": "0.01",
+		"iterations": "1000",
+		"lowercase": "true",
+		"topwords": "10",
+		"autolabels": "false",
+		"autowords": "false",
+		"stopwords": "",
+		"stoplabels": ""
+	},
+	"docker": {
+		"email": "cbadenes@gmail.com",
+		"password": "secret",
+		"repository": "librairy/malaria-disease-model",
+		"user": "cbadenes"
+	},
+	"dataSource": {
+		"name": "cord19",
+		"cache": false,
+		"dataFields": {
+			"id": "id",
+			"labels": [],
+			"text": [
+				"text_t"
+			]
+		},
+		"filter": "size_i:[100 TO *] && bionlp_diseases_N2:malaria",
+		"format": "SOLR_CORE",
+		"offset": 0,
+		"size": -1,
+		"url": "http://librairy.linkeddata.es/data/covid-paragraphs"
+	}
+}
